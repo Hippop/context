@@ -11,6 +11,7 @@ export {
   requiresXmlWhitespacePreservation,
 } from "./compressors/structured.js"
 export { compressReadThroughPipeline, compressShellThroughPipeline, runRegisteredCompressor } from "./core/pipeline.js"
+export type { LoggerPort, MetricInput, MetricsSink, RawObservationWriter } from "./core/ports.js"
 export { createDefaultRegistry, selectCompressor } from "./core/registry.js"
 export { estimateTokens } from "./token-estimator.js"
 export type { CompressionResult, DensityConfig, DensityOptions, MetricsSnapshot } from "./types.js"

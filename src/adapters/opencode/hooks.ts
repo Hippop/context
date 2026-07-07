@@ -26,7 +26,12 @@ export function createOpenCodeHooks(deps: OpenCodeHookDependencies): Pick<
         tool: input.tool,
         command,
         output: output.output,
-        deps,
+        deps: {
+          config: deps.config,
+          metrics: deps.ledger,
+          rawStore: deps.rawStore,
+          logger: deps.log ? { log: deps.log } : undefined,
+        },
       })
       if (!compressed) return
       output.output = compressed.text

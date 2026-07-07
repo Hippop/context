@@ -1,5 +1,7 @@
 # Architecture
 
+完整架构书见 [`docs/architecture-book.md`](architecture-book.md)。本文保留为快速概览。
+
 The plugin sits only at public OpenCode extension points and does not patch OpenCode itself.
 
 ```text

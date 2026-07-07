@@ -1,6 +1,5 @@
-import type { CompressionKind, CompressionResult, DensityConfig, MetricRecord } from "../types.js"
-import type { MetricsLedger } from "../metrics.js"
-import type { RawStore } from "../raw-store.js"
+import type { CompressionKind, CompressionResult, DensityConfig } from "../types.js"
+import type { LoggerPort, MetricsSink, RawObservationWriter } from "./ports.js"
 
 export type ContextSource = "read" | "shell" | "history" | "compaction"
 export type ContentKind = "code" | "instruction" | "markdown" | "json" | "xml" | "log" | "shell" | "history" | "raw"
@@ -39,9 +38,9 @@ export interface Compressor {
 
 export interface PipelineDependencies {
   config: DensityConfig
-  ledger: MetricsLedger
-  rawStore: RawStore
-  log?: (level: "debug" | "info" | "warn" | "error", message: string, error?: unknown) => Promise<void>
+  metrics: MetricsSink
+  rawStore: RawObservationWriter
+  logger?: LoggerPort
 }
 
 export interface PipelineCompression {
@@ -50,5 +49,3 @@ export interface PipelineCompression {
   rawID?: string
   marker?: string
 }
-
-export type MetricInput = Omit<MetricRecord, "kind" | "timestamp">

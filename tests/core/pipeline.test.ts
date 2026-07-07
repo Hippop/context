@@ -88,9 +88,9 @@ describe("core compression pipeline", () => {
           shell: { ...DEFAULT_CONFIG.shell, minChars: 0, minSavingsRatio: 0 },
           rawStore: { ...DEFAULT_CONFIG.rawStore, directory: cache },
         },
-        ledger,
+        metrics: ledger,
         rawStore,
-        log,
+        logger: { log },
       },
     })
 
@@ -116,7 +116,7 @@ describe("core compression pipeline", () => {
       output: `${"line\n".repeat(100)}api_key=sk-super-secret-value-1234567890`,
       deps: {
         config: { ...DEFAULT_CONFIG, shell: { ...DEFAULT_CONFIG.shell, minChars: 0, minSavingsRatio: 0 } },
-        ledger: new MetricsLedger(),
+        metrics: new MetricsLedger(),
         rawStore,
       },
     })

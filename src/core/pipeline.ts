@@ -10,10 +10,10 @@ import type {
   Compressor,
   ContentKind,
   ContentProfile,
-  MetricInput,
   PipelineCompression,
   PipelineDependencies,
 } from "./context-object.js"
+import type { MetricInput } from "./ports.js"
 import { createDefaultRegistry, selectCompressor } from "./registry.js"
 
 export interface ReadPipelineRequest {
@@ -90,7 +90,7 @@ export async function compressShellThroughPipeline(request: ShellPipelineRequest
   try {
     rawID = await deps.rawStore.save(request.sessionID, request.output, { tool: request.tool, command: request.command })
   } catch (error) {
-    await deps.log?.("warn", "Failed to persist a raw observation; preserving the original output", error)
+    await deps.logger?.log("warn", "Failed to persist a raw observation; preserving the original output", error)
     if (contract.requireRawStore) return undefined
   }
   if (contract.requireRawStore && !rawID) return undefined
@@ -103,7 +103,7 @@ export async function compressShellThroughPipeline(request: ShellPipelineRequest
   const wrappedRatio = (result.originalTokens - wrappedTokens) / Math.max(1, result.originalTokens)
   if (wrappedRatio < contract.minSavingsRatio) return undefined
 
-  deps.ledger.record(request.sessionID, "shell", metricFrom(result, marker.length + 1))
+  deps.metrics.record(request.sessionID, "shell", metricFrom(result, marker.length + 1))
   return { text, result, rawID, marker }
 }
 
