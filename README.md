@@ -14,7 +14,7 @@
 - `context_report`：输出估算 token 节省、压缩耗时和观测到的自动 compact 次数。
 - 单元测试与确定性 benchmark：token 节省、延迟、128k 窗口持久性都可复现。
 
-需求领域模型见 [需求规格](docs/requirements.md)，算法与异常矩阵见 [算法调研](docs/compression-algorithms.md)，架构说明见 [Architecture](docs/architecture.md)，架构决策见 [`docs/adr/`](docs/adr/)（尤其是代码可理解性/可扩展性决策 [ADR-0004](docs/adr/0004-code-architecture-for-understandability-and-extensibility.md)），BDD 见 [行为规格](docs/bdd.md)，实际结果见 [Benchmark 报告](docs/benchmark-results.md)，逐项目标验收见 [交付审计](docs/delivery-audit.md)。
+需求领域模型见 [需求规格](docs/requirements.md)，算法与异常矩阵见 [算法调研](docs/compression-algorithms.md)，更多“文档类型 × 压缩特征 × 压缩算法”的场景 backlog 见 [压缩场景矩阵](docs/compression-scenario-matrix.md)，架构说明见 [Architecture](docs/architecture.md)，架构决策见 [`docs/adr/`](docs/adr/)（尤其是代码可理解性/可扩展性决策 [ADR-0004](docs/adr/0004-code-architecture-for-understandability-and-extensibility.md)），BDD 见 [行为规格](docs/bdd.md)，实际结果见 [Benchmark 报告](docs/benchmark-results.md)，逐项目标验收见 [交付审计](docs/delivery-audit.md)。
 
 ## 安装
 

@@ -2,6 +2,8 @@
 
 日期：2026-07-06
 
+补充：更细的“文档类型 × 压缩特征 × 压缩算法”场景清单见 `docs/compression-scenario-matrix.md`。
+
 ## 1. 边界：压缩字节不等于压缩 Context
 
 gzip、Brotli、zstd 和 LZ4 适合 raw store 与网络传输；如果在送入模型前解压，token 数不会减少。Context 压缩必须满足以下至少一种：
