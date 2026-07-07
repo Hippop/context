@@ -1,0 +1,53 @@
+{
+  "name": "opencode-context-density",
+  "version": "0.1.0",
+  "description": "A safe, observable context-density plugin for OpenCode",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./api": {
+      "types": "./dist/api.d.ts",
+      "import": "./dist/api.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "benchmark": "tsx benchmark/run.ts",
+    "benchmark:ab": "tsx benchmark/opencode-ab.ts",
+    "test:opencode": "tsx benchmark/opencode-smoke.ts",
+    "check": "npm run typecheck && npm test && npm run build"
+  },
+  "keywords": [
+    "opencode",
+    "plugin",
+    "context",
+    "token",
+    "compression"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.17.13"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}

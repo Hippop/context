@@ -1,0 +1,22 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    [
+      "opencode-context-density",
+      {
+        "shell": {
+          "minChars": 1000,
+          "minSavingsRatio": 0.12,
+          "preserveVerbose": true
+        },
+        "history": {
+          "keepRecentToolOutputs": 8
+        },
+        "rawStore": {
+          "enabled": true,
+          "ttlHours": 168
+        }
+      }
+    ]
+  ]
+}
