@@ -13,6 +13,7 @@ export interface RawMetadata {
 
 export class RawStore {
   readonly root: string
+  private available = true
 
   constructor(
     worktree: string,
@@ -26,12 +27,21 @@ export class RawStore {
 
   async initialize(): Promise<void> {
     if (!this.config.enabled) return
-    await mkdir(this.root, { recursive: true })
-    await this.cleanupExpired()
+    try {
+      if (isVirtualFilesystemPath(this.root)) {
+        throw new Error(`Raw observation store cannot use virtual filesystem path: ${this.root}`)
+      }
+      await mkdir(this.root, { recursive: true })
+      await this.cleanupExpired()
+      this.available = true
+    } catch (error) {
+      this.available = false
+      throw error
+    }
   }
 
   async save(sessionID: string, text: string, metadata: Omit<RawMetadata, "createdAt" | "chars">): Promise<string | undefined> {
-    if (!this.config.enabled || Buffer.byteLength(text) > this.config.maxBytesPerSession) return undefined
+    if (!this.config.enabled || !this.available || Buffer.byteLength(text) > this.config.maxBytesPerSession) return undefined
     const directory = this.sessionDirectory(sessionID)
     await mkdir(directory, { recursive: true })
     await this.pruneToBudget(directory, Buffer.byteLength(text))
@@ -100,4 +110,9 @@ export class RawStore {
         }),
     )
   }
+}
+
+function isVirtualFilesystemPath(target: string): boolean {
+  const normalized = path.resolve(target)
+  return normalized === "/proc" || normalized.startsWith("/proc/") || normalized === "/sys" || normalized.startsWith("/sys/") || normalized === "/dev" || normalized.startsWith("/dev/")
 }

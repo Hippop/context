@@ -65,7 +65,10 @@ npm run benchmark
 npm run benchmark:ab -- --model provider/model --runs 5 --rounds 3
 ```
 
-核心设计使用 [OpenCode 插件文档](https://opencode.ai/docs/zh-cn/plugins/)的公开 hooks/custom tools。Shell 压缩参考了 RTK 一类工具的命令感知、保守回退和收益统计思路，但不直接引用 RTK 或其他压缩框架；本实现独立工作，不要求安装 RTK。
+AI 原生研发调度器现已拆分到独立项目
+[`AI原生研发调度系统/`](AI原生研发调度系统/)，默认使用 OpenCode Agent。
+
+核心插件设计使用 [OpenCode 插件文档](https://opencode.ai/docs/zh-cn/plugins/)的公开 hooks/custom tools。Shell 压缩参考了 RTK 一类工具的命令感知、保守回退和收益统计思路，但不直接引用 RTK 或其他压缩框架；本实现独立工作，不要求安装 RTK。
 
 ## 当前边界
 
